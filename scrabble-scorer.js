@@ -105,8 +105,30 @@ function vowelBonusScorer(word) {
 
 let scrabbleScorer = oldScrabbleScorer;
 
-const scoringAlgorithms = ['Simple Score', 'Bonus Vowels', 'Scrabble'];
+const scoringAlgorithms = [
+   {
+      name: 'Simple Score',
+      description: 'Each letter is worth 1 point',
+      scoringFunction: simpleScorer
+   }, 
+   {
+      name: 'Bonus Vowels',
+      description: 'Vowels are 3 pts, consonants are 1 pt.',
+      scoringFunction: vowelBonusScorer
+   },
+   {
+      name: 'Scrabble',
+      description: 'The traditional scoring algorithm.',
+      scoringFunction: oldScrabbleScorer
+   }
+];
 
+
+// TODO: Finish writing scorerPrompt() so that the user can select which scoring algorithm to use when the program scores their word. 
+// Use the selected algorithm to determine the score for the word:
+// If the user enters 0, have the program output a score using the simple scorer.
+// If the user enters 1, use the vowel bonus scoring function.
+// If the user enters 2, use the Scrabble scoring option.
 function scorerPrompt() {}
 
 function transform() {};
