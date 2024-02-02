@@ -1,5 +1,5 @@
 // This assignment is inspired by a problem on Exorcism (https://exercism.org/tracks/javascript/exercises/etl) that demonstrates Extract-Transform-Load using Scrabble's scoring system. 
-
+// Import required module/s
 const input = require("readline-sync");
 const prompt = require('prompt-sync')({ sigint: true });
 
@@ -34,10 +34,18 @@ function oldScrabbleScorer(word) {
 // TODO: your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
 
+// function prompt for word to score
 function initialPrompt() {
+   // input prompted word for Scrabble
    let word = input.question("Let's play some scrabble! Enter a word: ");
+
+   // Score input word with oldScrabbleScorer function call
    const result = oldScrabbleScorer(word);
+
+   // print scoring output
    console.log(result);
+
+   // return word
    return result
 };
 
