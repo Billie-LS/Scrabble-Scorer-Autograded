@@ -5,13 +5,22 @@ const prompt = require('prompt-sync')({ sigint: true });
 
 
 const oldPointStructure = {
-  1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
-  2: ['D', 'G'],
-  3: ['B', 'C', 'M', 'P'],
-  4: ['F', 'H', 'V', 'W', 'Y'],
-  5: ['K'],
-  8: ['J', 'X'],
-  10: ['Q', 'Z']
+   1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+   2: ['D', 'G'],
+   3: ['B', 'C', 'M', 'P'],
+   4: ['F', 'H', 'V', 'W', 'Y'],
+   5: ['K'],
+   8: ['J', 'X'],
+   10: ['Q', 'Z']
+};
+
+const simpleScorerPointStructure = {
+   1: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+};
+
+const BonusPointStructure = {
+   1: ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z'],
+   3: ['A', 'E', 'I', 'O', 'U']
 };
 
 function oldScrabbleScorer(word) {
@@ -49,13 +58,39 @@ function initialPrompt() {
    return result
 };
 
-let simpleScorer ;
+// TODO: Define a function that takes a word as a parameter and returns a numerical score. Each letter within the word is worth 1 point.
+function simpleScorer(word) {
+	word = word.toUpperCase();
+	let letterPoints = "";
+   
+   for (let i = 0; i < word.length; i++) {
+      
+      for (const pointValue in simpleScorerPointStructure) {
+         
+         if (simpleScorerPointStructure[pointValue].includes(word[i])) {
+			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
+
+      }
+   }
+	}
+   return letterPoints;
+}
+
+
+// TODO: Define a function that takes a word as a parameter and returns a score. Each vowel within the word is worth 3 points, and each consonant is worth 1 point.
+
+
+
+
+
+
+// let simpleScorer; 
 
 let vowelBonusScorer;
 
 let scrabbleScorer = oldScrabbleScorer;
 
-const scoringAlgorithms = [];
+const scoringAlgorithms = ['Simple Score', 'Bonus Vowels', 'Scrabble'];
 
 function scorerPrompt() {}
 
