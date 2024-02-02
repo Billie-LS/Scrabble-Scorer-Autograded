@@ -18,7 +18,7 @@ const simpleScorerPointStructure = {
    1: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 };
 
-const BonusPointStructure = {
+const bonusPointStructure = {
    1: ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z'],
    3: ['A', 'E', 'I', 'O', 'U']
 };
@@ -78,7 +78,22 @@ function simpleScorer(word) {
 
 
 // TODO: Define a function that takes a word as a parameter and returns a score. Each vowel within the word is worth 3 points, and each consonant is worth 1 point.
+function vowelBonusScorer(word) {
+	word = word.toUpperCase();
+	let letterPoints = "";
+   
+   for (let i = 0; i < word.length; i++) {
+      
+      for (const pointValue in bonusPointStructure) {
+         
+         if (bonusPointStructure[pointValue].includes(word[i])) {
+			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
 
+      }
+   }
+	}
+   return letterPoints;
+}
 
 
 
@@ -86,7 +101,7 @@ function simpleScorer(word) {
 
 // let simpleScorer; 
 
-let vowelBonusScorer;
+// let vowelBonusScorer;
 
 let scrabbleScorer = oldScrabbleScorer;
 
