@@ -27,6 +27,7 @@ const bonusPointStructure = {
 // let totalScore = 0;  
 
 function oldScrabbleScorer(word) {
+   // setting to case insesitive
 	word = word.toUpperCase();
    // for template literal score output strings
 	let letterPoints = "";
@@ -52,7 +53,7 @@ function oldScrabbleScorer(word) {
    };
 }
 
-// your job is to finish writing these functions and variables that we've named //
+// TODO: your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
 
 // TODO: Modify the provided initialPrompt() function to prompt the user to enter a word to score.
@@ -67,7 +68,7 @@ function initialPrompt() {
    for (let i = 0; i < scoringAlgorithms.length; i++) {
       console.log(`${i} - ${scoringAlgorithms[i].name}: ${scoringAlgorithms[i].description}`);
    }
-   const selectedAlgorithm = input.question("Enter 0, 1, or 2: ");
+   const selectedAlgorithm = Number(input.question("Enter 0, 1, or 2: "));
    const selectedScorer = scoringAlgorithms[selectedAlgorithm].scoringFunction;
 
    const result = selectedScorer(word); // Score word using scoring algorithm selected
@@ -85,7 +86,6 @@ function initialPrompt() {
 };
 
 // let simpleScorer; 
-
 // TODO: Define function simpleScorer takes word as parameter and returns a numerical score. Each letter of the word is 1 point.
 
 function simpleScorer(word) {
@@ -100,7 +100,11 @@ function simpleScorer(word) {
       totalScore += 1;  // Increment the total score
    }
    console.log(`Total Score: ${totalScore}`);  // print out total score
-   return letterPoints;
+   // Return object contain letterPoints and totalScore
+   return {
+      letterPoints: letterPoints,
+      totalScore: totalScore
+   };
 }
 
 
@@ -118,7 +122,6 @@ function simpleScorer(word) {
 
 
 // let vowelBonusScorer;
-
 // TODO: Define function vowelBonusScorer takes word as a parameter and returns a numerical score. Each vowel is worth 3 points, and each consonant is 1 point.
 function vowelBonusScorer(word) {
 	word = word.toUpperCase();
@@ -139,7 +142,11 @@ function vowelBonusScorer(word) {
       }
 	}
    console.log(`Total Score: ${totalScore}`);  // print out total score
-   return letterPoints;
+   // Return object contain letterPoints and totalScore
+   return {
+      letterPoints: letterPoints,
+      totalScore: totalScore
+   };
 }
 
 // function vowelBonusScorer(word) {
@@ -188,9 +195,25 @@ const scoringAlgorithms = [
 // If the user enters 2, use the Scrabble scoring option.
 function scorerPrompt() {}
 
-function transform() {};
+// function transform() {};
 
-let newPointStructure;
+function transform(oldPointStructure) {
+   const newPointStructure = {};
+
+   for (const pointValue in oldPointStructure) {
+      const letters = oldPointStructure[pointValue];
+
+      for (const letter of letters) {
+         // Convert the letter to uppercase and assign the point value
+         newPointStructure[letter.toUpperCase()] = parseInt(pointValue);
+      }
+   }
+
+   return newPointStructure;
+}
+
+// let newPointStructure;
+let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
    initialPrompt();
