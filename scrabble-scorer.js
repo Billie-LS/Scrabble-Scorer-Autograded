@@ -196,19 +196,24 @@ const scoringAlgorithms = [
 function scorerPrompt() {}
 
 // function transform() {};
-
+// function transform takes oldPointStructure to make new point structure
 function transform(oldPointStructure) {
+   // empty objectfor the new point structure
    const newPointStructure = {};
 
+
+   // Iterate through each key (point value) in oldPointStructure
    for (const pointValue in oldPointStructure) {
+      // Get array of letters corresponding to current point value
       const letters = oldPointStructure[pointValue];
 
+      // Iterate through each letter in the array
       for (const letter of letters) {
          // Convert the letter to uppercase and assign the point value
          newPointStructure[letter.toUpperCase()] = parseInt(pointValue);
       }
    }
-
+   // Return the new point structure
    return newPointStructure;
 }
 
