@@ -55,7 +55,7 @@ function initialPrompt() {
    const result = selectedScorer(word);
 
    // print scoring output
-   console.log(result.letterPoints); // Print letterPoints
+   // console.log(result.letterPoints); // Print letterPoints
    
    console.log(`Total Score: ${result.totalScore}`);// Print totalScore
 
@@ -83,11 +83,11 @@ function simpleScorer(word){
    }
 
    // Return object contain letterPoints and totalScore
-   return totalScore;
-   // return {
-   //    letterPoints: letterPoints,
-   //    totalScore: totalScore
-   // };
+   // return totalScore;
+   return {
+      letterPoints: letterPoints,
+      totalScore: totalScore
+   };
 };
 
 
@@ -119,11 +119,11 @@ function vowelBonusScorer(word) {
       }
    }
    // return letterPoints;
-   return totalScore;
-   // return {
-   //    letterPoints: letterPoints,
-   //    totalScore: totalScore
-   // };
+   // return totalScore;
+   return {
+      letterPoints: letterPoints,
+      totalScore: totalScore
+   };
 }
 
 
@@ -156,11 +156,11 @@ function scrabbleScorer(word) {
       }
    }
    // Return object contain letterPoints and totalScore
-   return totalScore;
-   // return {
-   //    letterPoints: letterPoints,
-   //    totalScore: totalScore
-   // };
+   // return totalScore;
+   return {
+      letterPoints: letterPoints,
+      totalScore: totalScore
+   };
 }
 
 
@@ -218,7 +218,7 @@ function scorerPrompt() {
 // TASK 3: TRANSFORM SCRABBLE SCORING
 // TODO: function transform takes oldPointStructure to make new point structure //
 
-function transform() {
+function transform(oldPointStructure) {
    const newPointStructure = {}
 
    for (const key in oldPointStructure) {
