@@ -21,7 +21,7 @@ function oldScrabbleScorer(word) {
    let letterPoints = "";
 
    // variable to sum up total numeric score
-   let totalScore = 0;
+   let score = 0;
 
    for (let i = 0; i < word.length; i++) {
 
@@ -30,15 +30,17 @@ function oldScrabbleScorer(word) {
          if (oldPointStructure[pointValue].includes(word[i])) {
             letterPoints += `Points for '${word[i]}': ${pointValue}\n`;
 
-            totalScore += parseInt(pointValue); // Increment the total score
+            score += parseInt(pointValue); // Increment the total score
          }
       }
    }
+   // returns a numerical 'score', i.e. integer value
+   return score;
    // Return object contain letterPoints and totalScore
-   return {
-      letterPoints: letterPoints,
-      totalScore: totalScore
-   };
+   // return {
+   //    letterPoints: letterPoints,
+   //    score: score
+   // };
 }
 
 
@@ -52,6 +54,8 @@ function initialPrompt() {
    
    // call the selected scorer from scorerPrompt()
    const selectedScorer = scorerPrompt();
+
+   // initializes result equal to returned 'score' value
    const result = selectedScorer(word);
 
    // print scoring output
@@ -138,7 +142,7 @@ let scrabbleScorer = oldScrabbleScorer;
 // replace the oldScrabbleScorer() function in scoringAlgorithms with this new function.
 scrabbleScorer = function scrabbleScorer(word) {
    
-   word = word.toUpperCase(); // make case insensitive
+   word = word.toLowerCase(); // make case insensitive
    let letterPoints = "";
 
    // variable to sum up total numeric score
@@ -176,17 +180,17 @@ scrabbleScorer = function scrabbleScorer(word) {
 const scoringAlgorithms = [
    {
       name: 'Simple Score',
-      description: 'Each letter is worth 1 point.',
+      description: "Each letter is worth 1 point. ",
       scoringFunction: simpleScorer
    }, 
    {
       name: 'Bonus Vowels',
-      description: 'Vowels are 3 pts, consonants are 1 pt.',
+      description: 'Vowels are 3 pts, consonants are 1 pt. ',
       scoringFunction: vowelBonusScorer
    }, 
    {
       name: 'Scrabble',
-      description: 'The traditional scoring algorithm.',
+      description: 'The traditional scoring algorithm. ',
       scoringFunction: scrabbleScorer
    }
 ];
@@ -242,7 +246,7 @@ function runProgram() {
    initialPrompt();
    
 }
-
+initialPrompt()
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
 module.exports = {
