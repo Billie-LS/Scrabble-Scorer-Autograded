@@ -3,7 +3,7 @@
 const input = require("readline-sync");
 const prompt = require('prompt-sync')({ sigint: true });
 
-
+// old scrabble point structure
 const oldPointStructure = {
    1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
    2: ['D', 'G'],
@@ -15,9 +15,6 @@ const oldPointStructure = {
 };
 
 
-// Initialize a variable to keep track of the total score
-// let totalScore = 0;  
-
 function oldScrabbleScorer(word) {
    
    word = word.toUpperCase(); // make case insensitive
@@ -27,6 +24,7 @@ function oldScrabbleScorer(word) {
    let totalScore = 0;
 
    for (let i = 0; i < word.length; i++) {
+
       // note that the object 'key' is pointValue!
       for (const pointValue in oldPointStructure) {
          if (oldPointStructure[pointValue].includes(word[i])) {
@@ -47,18 +45,16 @@ function oldScrabbleScorer(word) {
 // TODO: your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
 
-// TODO: Modify the provided initialPrompt() function to prompt the user to enter a word to score.
-
+// TODO:  Modify the provided initialPrompt() function to prompt the user to enter a word to score.
 
 function initialPrompt() {
    let word = input.question("Let's play some scrabble! Enter a word: ");
-
+   
    // call the selected scorer from the scorerprompt function
    const selectedScorer = scorerPrompt();
    const result = selectedScorer(word);
 
    // print scoring output
-   console.log('\n');
    console.log(result.letterPoints); // Print letterPoints
    
    console.log(`Total Score: ${result.totalScore}`);// Print totalScore
@@ -66,7 +62,6 @@ function initialPrompt() {
    return result;
 
 };
-
 
 /*
 TASK 2: ADD AND ORGANIZE SCORING ALGORITHMS
@@ -76,24 +71,25 @@ Your job here is to write two other scoring algorithms for the Scrabble player.
 // TODO: Define a function that takes a word as a parameter and returns a numerical score. 
 // Each letter within the word is worth 1 point.
 
-function simpleScorer(word) {
-	word = word.toUpperCase();
-	// for template literal score output strings
+function simpleScorer(word){
+	word = word.toUpperCase(); // make case insensitive
 	let letterPoints = "";
    // variable to sum up total numeric score
    let totalScore = 0;
-   
+
    for (let i = 0; i < word.length; i++) {
       letterPoints += `Points for '${word[i]}': 1\n`;
       totalScore += 1;  // Increment the total score
    }
-   console.log(`Total Score: ${totalScore}`);  // print out total score
+
    // Return object contain letterPoints and totalScore
-   return {
-      letterPoints: letterPoints,
-      totalScore: totalScore
-   };
-}
+   return totalScore;
+   // return {
+   //    letterPoints: letterPoints,
+   //    totalScore: totalScore
+   // };
+};
+
 
 // TODO: Define a function that takes a word as a parameter and returns a score. 
 // Each vowel within the word is worth 3 points, and each consonant is worth 1 point.
@@ -122,17 +118,49 @@ function vowelBonusScorer(word) {
          totalScore += 1;
       }
    }
+   // return letterPoints;
+   return totalScore;
+   // return {
+   //    letterPoints: letterPoints,
+   //    totalScore: totalScore
+   // };
+}
+
+
+// TODO: Use the oldScrabbleScorer() function provided to score the word provided by the user. 
+// Print the result to the console.
+// let scrabbleScorer = oldScrabbleScorer;
+
+// TODO: Use newPointStructure, to finish writing scrabbleScorer() function
+// replace the oldScrabbleScorer() function in scoringAlgorithms with this new function.
+function scrabbleScorer(word) {
+   
+   word = word.toUpperCase(); // make case insensitive
+   let letterPoints = "";
+
+   // variable to sum up total numeric score
+   let totalScore = 0;
+
+   for (let i = 0; i < word.length; i++) {
+
+      // note that the object 'key' is letter!
+      const letter = word[i];
+
+      // Check if the letter exists in the newPointStructure
+      if (newPointStructure.hasOwnProperty(letter)) {
+         const pointValue = newPointStructure[letter];
+
+         letterPoints += `Points for '${letter}': ${pointValue}\n`;
+
+         totalScore += pointValue; // Increment the total score
+      }
+   }
    // Return object contain letterPoints and totalScore
    return {
       letterPoints: letterPoints,
       totalScore: totalScore
    };
 }
-
-
-// TODO: Use the oldScrabbleScorer() function provided to score the word provided by the user. 
-// Print the result to the console.
-let scrabbleScorer = oldScrabbleScorer;
 
 
 // TODO: Finish writing the scoringAlgorithms array. 
@@ -162,50 +190,47 @@ const scoringAlgorithms = [
 // TODO: Finish writing scorerPrompt() so that the user can select which scoring algorithm to use when the program scores their word. 
 // scorerPrompt() should return the object the user has selected.
 // Use the selected algorithm to determine the score for the word:
-/*
-If the user enters 0, have the program output a score using the simple scorer.
-If the user enters 1, use the vowel bonus scoring function.
-If the user enters 2, use the Scrabble scoring option.
-scorerPrompt() should return the object the user has selected.
-*/
+// If the user enters 0, have the program output a score using the simple scorer.
+// If the user enters 1, use the vowel bonus scoring function.
+// If the user enters 2, use the Scrabble scoring option.
+// scorerPrompt() should return the object the user has selected.
 
+// function prompts user to select scoring algorithm
 function scorerPrompt() {
    
    console.log('Which scoring algorithm would you like to use?\n');
+
+   // Iterate each algorithm in scoringAlgorithms array
    for (let i = 0; i < scoringAlgorithms.length; i++){
       console.log(`${i} - ${scoringAlgorithms[i].name}: ${scoringAlgorithms[i].description}`);
    }
+   // Prompt user choice (0, 1, or 2) and convert input to integer
    let selectedAlgorithm = parseInt(input.question('Enter 0, 1, or 2: '));
+
+   // retrieve scoring algo by index = user input choice (0, 1, or 2) 
    const selectedScorer = scoringAlgorithms[selectedAlgorithm].scoringFunction;
+   // Return selected scoring function
    return selectedScorer;
 }
 
 
+// TASK 3: TRANSFORM SCRABBLE SCORING
+// TODO: function transform takes oldPointStructure to make new point structure //
 
+function transform() {
+   const newPointStructure = {}
 
-// function transform() {};
-// function transform takes oldPointStructure to make new point structure
-function transform(oldPointStructure) {
-   // empty objectfor the new point structure
-   const newPointStructure = {};
+   for (const key in oldPointStructure) {
+      const letters = oldPointStructure[key];
 
-
-   // Iterate through each key (point value) in oldPointStructure
-   for (const pointValue in oldPointStructure) {
-      // Get array of letters corresponding to current point value
-      const letters = oldPointStructure[pointValue];
-
-      // Iterate through each letter in the array
       for (const letter of letters) {
-         // Convert the letter to uppercase and assign the point value
-         newPointStructure[letter.toUpperCase()] = parseInt(pointValue);
+         newPointStructure[letter.toLowerCase()] = parseInt(key);
       }
    }
-   // Return the new point structure
    return newPointStructure;
-}
+};
 
-// let newPointStructure;
+// TODO: Locate the newPointStructure object in the starter code and set it equal to transform(oldPointStructure).
 let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
