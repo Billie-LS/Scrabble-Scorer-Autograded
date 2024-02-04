@@ -156,10 +156,11 @@ function scrabbleScorer(word) {
       }
    }
    // Return object contain letterPoints and totalScore
-   return {
-      letterPoints: letterPoints,
-      totalScore: totalScore
-   };
+   return totalScore;
+   // return {
+   //    letterPoints: letterPoints,
+   //    totalScore: totalScore
+   // };
 }
 
 
