@@ -1,7 +1,6 @@
 // This assignment is inspired by a problem on Exorcism (https://exercism.org/tracks/javascript/exercises/etl) that demonstrates Extract-Transform-Load using Scrabble's scoring system. 
 // Import required module/s
 const input = require("readline-sync");
-const prompt = require('prompt-sync')({ sigint: true });
 
 // old scrabble point structure
 const oldPointStructure = {
@@ -36,11 +35,6 @@ function oldScrabbleScorer(word) {
    }
    // returns a numerical 'score', i.e. integer value
    return score;
-   // Return object contain letterPoints and totalScore
-   // return {
-   //    letterPoints: letterPoints,
-   //    score: score
-   // };
 }
 
 
@@ -58,11 +52,7 @@ function initialPrompt() {
    // initializes result equal to returned 'score' value
    const result = selectedScorer(word);
 
-   // print scoring output
-   // console.log(result.letterPoints); // Print letterPoints
-   
    console.log(`Total Score: ${result}`);// Print totalScore
-   // console.log(`Total Score: ${result.totalScore}`);// Print totalScore
 
    return result;
 
@@ -89,12 +79,6 @@ function simpleScorer(word){
 
    // returns a numerical 'score', i.e. integer value
    return score;
-
-   // Return object contain letterPoints and totalScore
-   // return {
-   //    letterPoints: letterPoints,
-   //    score: score
-   // };
 };
 
 
@@ -127,10 +111,6 @@ function vowelBonusScorer(word) {
    }
    // returns a numerical 'score', i.e. integer value
    return score;
-   // return {
-   //    letterPoints: letterPoints,
-   //    score: score
-   // };
 }
 
 
@@ -164,11 +144,6 @@ scrabbleScorer = function scrabbleScorer(word) {
    }
    // returns a numerical 'score', i.e. integer value
    return score;
-   // Return object contain letterPoints and totalScore
-   // return {
-   //    letterPoints: letterPoints,
-   //    score: score
-   // };
 }
 
 
@@ -182,19 +157,16 @@ const scoringAlgorithms = [
       name: 'Simple Score',
       description: "Each letter is worth 1 point. ",
       scorerFunction: simpleScorer
-      // scoringFunction: simpleScorer
    }, 
    {
       name: 'Bonus Vowels',
       description: 'Vowels are 3 pts, consonants are 1 pt. ',
-      scorerFunction: vowelBonusScorer
-      // scoringFunction: vowelBonusScorer
+      scorerFunction: simpleScorer
    }, 
    {
       name: 'Scrabble',
       description: 'The traditional scoring algorithm. ',
       scorerFunction: scrabbleScorer
-      // scoringFunction: scrabbleScorer
    }
 ];
 
@@ -221,7 +193,8 @@ function scorerPrompt() {
 
    // retrieve scoring algo by index = user input choice (0, 1, or 2) 
    const selectedScorer = scoringAlgorithms[selectedAlgorithm].scorerFunction;
-   // const selectedScorer = scoringAlgorithms[selectedAlgorithm].scoringFunction;
+   // TEXT ERROR = const selectedScorer = scoringAlgorithms[selectedAlgorithm].scoringFunction;
+
    // Return selected scoring function
    return selectedScorer;
 }
