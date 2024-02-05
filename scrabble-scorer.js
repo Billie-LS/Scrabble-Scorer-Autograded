@@ -181,33 +181,73 @@ const scoringAlgorithms = [
    }
 ];
 
-
 // TODO: Finish writing scorerPrompt() so that the user can select which scoring algorithm to use when the program scores their word. 
-// scorerPrompt() should return the object the user has selected.
-// Use the selected algorithm to determine the score for the word:
-// If the user enters 0, have the program output a score using the simple scorer.
-// If the user enters 1, use the vowel bonus scoring function.
-// If the user enters 2, use the Scrabble scoring option.
-// scorerPrompt() should return the object the user has selected.
-
 // function prompts user to select scoring algorithm
-function scorerPrompt() {
-   
-   console.log('Which scoring algorithm would you like to use?\n');
+// scorerPrompt() retrieves user selected object (i.e. an element in the algorithms array).
+//  - user enters 0, scorerPrompt returns the simple scorer.
+//  - user enters 1, scorerPrompt returns the vowel bonus scorer.
+//  - user enters 2, scorerPrompt returns the Scrabble scorer.
+// EXCEPTION HANDLING: if user enters <0 or > 2 indicates
+// using 'DIW' syntax do{ if(){}}while();
+//  - indicates invalid response
+//  - re-prompts until valid response input
 
-   // Iterate each algorithm in scoringAlgorithms array
+function scorerPrompt() {
+   console.log('Which scoring algorithm would you like to use?\n');
+   
+   // iterate each algorithm of scoringAlgorithms array
    for (let i = 0; i < scoringAlgorithms.length; i++){
-      // template literal prints out name and description of algorithm
       console.log(`${i} - ${scoringAlgorithms[i].name}: ${scoringAlgorithms[i].description}`);
    }
-   // Prompt user choice (0, 1, or 2) and convert input to integer
-   let selectedAlgorithm = parseInt(input.question('Enter 0, 1, or 2: '));
-
-   // retrieve scoring algo by index = user input choice (0, 1, or 2) 
+   
+   let selectedAlgorithm;
+   
+   // continue prompt until valid choice (0, 1, or 2) is input
+   do {
+      // readline-sync prompt input (0, 1, or 2) convert input str to integer
+      selectedAlgorithm = parseInt(input.question('Enter 0, 1, or 2: '));
+      
+      // check choice validity
+      if (isNaN(selectedAlgorithm) || selectedAlgorithm < 0 || selectedAlgorithm >= scoringAlgorithms.length) {
+         console.log('Invalid choice. Please enter 0, 1, or 2.');
+      }
+   } while (isNaN(selectedAlgorithm) || selectedAlgorithm < 0 || selectedAlgorithm >= scoringAlgorithms.length);
+   
+   // retrieve scoring function with valid input choice
    const selectedScorer = scoringAlgorithms[selectedAlgorithm].scorerFunction;
-   // Return selected scoring function
+   
+   // return scoring function
    return selectedScorer;
 }
+
+
+
+// // TODO: Finish writing scorerPrompt() so that the user can select which scoring algorithm to use when the program scores their word. 
+// // scorerPrompt() should return the object the user has selected.
+// // Use the selected algorithm to determine the score for the word:
+// // If the user enters 0, have the program output a score using the simple scorer.
+// // If the user enters 1, use the vowel bonus scoring function.
+// // If the user enters 2, use the Scrabble scoring option.
+// // scorerPrompt() should return the object the user has selected.
+
+// // function prompts user to select scoring algorithm
+// function scorerPrompt() {
+   
+//    console.log('Which scoring algorithm would you like to use?\n');
+
+//    // Iterate each algorithm in scoringAlgorithms array
+//    for (let i = 0; i < scoringAlgorithms.length; i++){
+//       // template literal prints out name and description of algorithm
+//       console.log(`${i} - ${scoringAlgorithms[i].name}: ${scoringAlgorithms[i].description}`);
+//    }
+//    // Prompt user choice (0, 1, or 2) and convert input to integer
+//    let selectedAlgorithm = parseInt(input.question('Enter 0, 1, or 2: '));
+
+//    // retrieve scoring algo by index = user input choice (0, 1, or 2) 
+//    const selectedScorer = scoringAlgorithms[selectedAlgorithm].scorerFunction;
+//    // Return selected scoring function
+//    return selectedScorer;
+// }
 
 
 // TASK 3: TRANSFORM SCRABBLE SCORING
