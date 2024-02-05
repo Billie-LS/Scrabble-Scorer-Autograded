@@ -1,7 +1,6 @@
 // This assignment is inspired by a problem on Exorcism (https://exercism.org/tracks/javascript/exercises/etl) that demonstrates Extract-Transform-Load using Scrabble's scoring system. 
 // Import required module/s
 const input = require("readline-sync");
-const prompt = require('prompt-sync')({ sigint: true });
 
 // old scrabble point structure
 const oldPointStructure = {
