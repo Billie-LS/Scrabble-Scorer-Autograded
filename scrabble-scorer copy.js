@@ -35,6 +35,10 @@ function oldScrabbleScorer(word) {
    }
    // returns a numerical 'score', i.e. integer value
    return score;
+   // Return object contain letterPoints and totalScore
+   // return {
+   //    letterPoints: letterPoints,
+   //    score: score
    // };
 }
 
