@@ -72,20 +72,30 @@ Your job here is to write two other scoring algorithms for the Scrabble player.
 // Each letter within the word is worth 1 point.
 
 function simpleScorer(word){
-	word = word.toUpperCase(); // make case insensitive
+   let score = 0; // variable to sum up total numeric score
 
-	let letterPoints = ""; // empty string store letter points data
-   let score = 0;// variable to sum up total numeric score
+   score = word.length // Each letter within the word is worth 1 point.
 
-   // iterate over each letter in word
-   for (let i = 0; i < word.length; i++) {
-      // temp literal match the letter with the 1 point
-      letterPoints += `Points for '${word[i]}': 1\n`;
-      score += 1;  // Increment the total score
-   }
    // returns a numerical 'score', i.e. integer value
    return score;
 };
+
+
+// function simpleScorer(word){
+// 	word = word.toUpperCase(); // make case insensitive
+
+// 	let letterPoints = ""; // empty string store letter points data
+//    let score = 0;// variable to sum up total numeric score
+
+//    // iterate over each letter in word
+//    for (let i = 0; i < word.length; i++) {
+//       // temp literal match the letter with the 1 point
+//       letterPoints += `Points for '${word[i]}': 1\n`;
+//       score += 1;  // Increment the total score
+//    }
+//    // returns a numerical 'score', i.e. integer value
+//    return score;
+// };
 
 
 // TODO: Define a function 'vowelBonusScorer' that takes a word as a parameter and returns a score. 
